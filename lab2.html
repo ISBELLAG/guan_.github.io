@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>lab2</title>
+<script id="vertex-shader" type="x-shader/x-vertex">
+	attribute vec4 vPosition;
+	void main(){
+		gl_Position = vPosition;
+	}
+	</script>
+    <script id="fragment-shader" type="x-shader/x-fragment">
+	precision mediump float;
+	void main(){
+		gl_FragColor = vec4( 1.0, 0.0, 0.0, 1.0 );
+	}
+	</script>
+	<script id="vertex-shader-3d" type="x-shader/x-vertex">
+	attribute vec3 vPosition;
+	attribute vec3 vColor;
+	varying vec4 color;
+
+	void main(){
+		gl_Position = vec4( vPosition, 1.0 );
+		color = vec4( vColor, 1.0 );
+	}
+	</script>
+
+    <script id="fragment-shader-3d" type="x-shader/x-fragment">
+	precision mediump float;
+	varying vec4 color;
+	void main(){
+		gl_FragColor = color;
+	}
+	</script>
+	<script type="text/javascript" src="./js/common/webgl-utils.js"></script>
+	<script type="text/javascript" src="./js/common/initShaders.js"></script>
+	<script type="text/javascript" src="./js/common/gl-matrix-min.js"></script>
+
+	<script type="text/javascript" src="./js/ch02/gasket-triangle.js"></script>
+</head>
+<body>
+<h2>Sierpinski Gasket 2D /3D</h2>
+<canvas id="gl-canvas" width="512" height="512">你的浏览器不支持HTML5 canvas元素</canvas>
+<br/>
+<input type="radio" name="Shape" value="2d" checked="checked"/>2D
+<input type="radio" name="Shape" value="3d"/>3D
+<input type="radio" name="Shape" value="wire"/>线框
+<button onclick = "myClickShape()">确定形状</button>
+<h5>task a. 要求在网页上增加交互式控件，输入部分的层次是(0-7)，绘制对应图案。</h5>
+<h5>task b.绘制三维效果的Sierpinski Gasket, 要求同任务a</h5>
+<h5>task c.完成不同层次剖分效果的绘制，这里的绘制采用线框模式</h5>
+<input type="range" id="myRange" min="0" max="7" value="4"/>
+<button onclick = "myClickGo()">go</button>
+<HR style="border:1 dashed #987cb9" width="100%"color=#987cb9 SIZE=2>
+<br/>
+<input type="radio" name="Change" value="NO" />不变形
+<input type="radio" name="Change" value="YES"/>变形
+<button onclick = "myClicksChange()">确认变形</button>
+<h5>task d.任务c中剖分后的三角形添加旋转效果。</h5>
+<h5>task e.对任务d中的三角形增加变形效果</h5>
+旋转角度选择(旋转角度0-360，初始角度为60度)<input type="range" id="myChange" min="0" max="360" value="60"/>
+<button onclick = "myClickRotate()">旋转确认</button>
+</body>
+</html>
